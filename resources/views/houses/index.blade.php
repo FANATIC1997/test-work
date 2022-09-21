@@ -206,6 +206,7 @@
 
                     </div>
 
+                    @if(count($classes) > 0)
                     <div class="page-filter__category">
 
                         <a href="#housing" class="page-filter__category-link" data-toggle="collapse">
@@ -233,6 +234,7 @@
                         </div>
 
                     </div>
+                    @endif
 
                     @if(count($generalOptions) > 0)
                     <div class="page-filter__category">
