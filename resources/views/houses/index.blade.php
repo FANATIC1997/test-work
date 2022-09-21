@@ -234,6 +234,7 @@
 
                     </div>
 
+                    @if(count($generalOptions) > 0)
                     <div class="page-filter__category">
 
                         <a href="#general" class="page-filter__category-link" data-toggle="collapse">
@@ -262,7 +263,9 @@
                         </div>
 
                     </div>
+                    @endif
 
+                    @if(count($additionalOptions['main']) > 0)
                     <div class="page-filter__category">
 
                         <a href="#additional" class="page-filter__category-link" data-toggle="collapse">
@@ -308,7 +311,9 @@
                         </div>
 
                     </div>
+                    @endif
 
+                    @if(count($servicesOptions) > 0)
                     <div class="page-filter__category service">
                         @foreach($servicesOptions as $option)
                             <div class="checkbox">
@@ -321,13 +326,13 @@
                             </div>
                         @endforeach
                     </div>
-
+                    @endif
                 </div>
 
                 <div class="page-filter__buttons">
 
-                    <button class="button button--pink w-100" type="submit" id="apply_filter">Применить
-                        фильтры
+                    <button class="button button--pink w-100" type="submit" id="apply_filter">
+                        Применить фильтры
                     </button>
 
                     <button class="button w-100" type="reset" id="reset_filter">Сбросить фильтры

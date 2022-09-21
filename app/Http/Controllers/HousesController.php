@@ -19,19 +19,18 @@ class HousesController extends Controller
      */
     public function index(Request $request)
     {
-        $queryHouses = Houses::limit(10);
+        $queryHouses = Houses::limit(12);
         $classes = Classes::all()->values();
         $generalOptions = Options::all()->where('type_checkbox', 'general')->values();
         $servicesOptions = Options::all()->where('type_checkbox', 'service')->values();
         $allAdditionalOptions = Options::all()->where('type_checkbox', 'additional');
-        $additionalOptions['main'] = $allAdditionalOptions->skip(0)->take(2)->values();
-        $additionalOptions['other'] = $allAdditionalOptions->skip(2)->values();
+        $additionalOptions['main'] = $allAdditionalOptions->skip(0)->take(5)->values();
+        $additionalOptions['other'] = $allAdditionalOptions->skip(5)->values();
 
         if ($request->has('deadline')) {
             $date = date("Y-m-d");
             $date = strtotime($date);
 
-            //$date = date('Y-m-d', $date);
             if($request->input('deadline') == 'passed'){
                 $queryHouses->where('term', '<', date('Y-m-d', $date));
             }else if($request->input('deadline') == 'this-year'){
@@ -60,7 +59,7 @@ class HousesController extends Controller
         }
 
         if (count($searchOptionArray) > 0)
-            $queryHouses->join('houses_options', 'houses.id', '=', 'houses_id')->where(['option_id' => $searchOptionArray]);
+            $queryHouses->join('houses_options', 'houses.id', '=', 'houses_id')->whereIn('option_id', $searchOptionArray);
 
         unset($searchOptionArray);
 
